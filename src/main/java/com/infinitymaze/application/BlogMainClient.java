@@ -1,8 +1,9 @@
-package com.infinitymaze.blogclient;
+package com.infinitymaze.application;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.infinitymaze.blogclient.PostClient;
 import com.infitymaze.application.posts.EnumPostType;
 import com.infitymaze.application.posts.Post;
 
@@ -16,7 +17,6 @@ public class BlogMainClient {
 	private static Post bd = new Post("Bd", "This is a content about bd", EnumPostType.REGULAR);
 	
 	public static void main(String[] args) {
-
 		// create Posts
 		List<Post> posts = new ArrayList<Post>();
 		posts.add(manga);
@@ -34,7 +34,6 @@ public class BlogMainClient {
 
 		PostClient.updatePost(book.getId(), bd);
 	}
-
 	
 
 }
