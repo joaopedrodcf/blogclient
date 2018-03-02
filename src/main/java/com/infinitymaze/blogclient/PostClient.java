@@ -1,7 +1,5 @@
 package com.infinitymaze.blogclient;
 
-import java.util.Arrays;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +18,10 @@ public class PostClient {
 	
 	public static void getAllPosts() {
 		Post[] posts = restTemplate.getForObject(REST_SERVICE_URI, Post[].class);
-		Arrays.asList(posts);
+		
+		for(Post post: posts) {
+			logger.info(post);
+		}
 
 	}
 
@@ -51,7 +52,7 @@ public class PostClient {
 
 	public static void createPost(Post post) {
 		restTemplate.postForLocation(REST_SERVICE_URI, post);
-		logger.info("createPost {}", post);
+		logger.info(post);
 	}
 
 	public static void updatePost(long id, Post post) {
