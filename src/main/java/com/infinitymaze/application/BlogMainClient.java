@@ -1,34 +1,39 @@
 package com.infinitymaze.application;
 
 
-import java.util.Arrays;
-
-import com.infinitymaze.blogclient.PostClient;
-import com.infinitymaze.blogclient.PostTypeClient;
+import com.infinitymaze.blogclient.CRUDClient;
 import com.infitymaze.application.posts.Post;
-import com.infitymaze.application.types.PostType;
+import com.infitymaze.application.types.Type;
 
 public class BlogMainClient {
 	
-	// Objects to be used in the tests
+	static Type important = new Type(1,"Important");
+	static Type regular = new Type(2,"Regular");
+	
+	static Post anime = new Post("Anime", "This is a content about anime",important);
+	static Post book = new Post("Book", "This is a content about book",regular);
+	
+	public static final String POST_URI = "http://localhost:8080/post/";
+
+	public static final String TYPE_URI = "http://localhost:8080/type/";
 
 	
 	public static void main(String[] args) {
 		
-		PostTypeClient.getAllPostTypes();
+		CRUDClient<Post> postClient = new CRUDClient<Post>(POST_URI,Post.class, Post[].class);
+		CRUDClient<Type> typeClient = new CRUDClient<Type>(TYPE_URI,Type.class, Type[].class);
 		
-		PostType important = new PostType(1, "Important");
-		PostType regular = new PostType(2, "Regular");
+		postClient.getAll();
+		typeClient.getAll();
 		
-		Post anime = new Post("Anime", "This is a content about anime",important);
-		Post book = new Post("Book", "This is a content about book",regular);
+		typeClient.create(important);
+		typeClient.create(regular);
 		
-		important.addPost(anime);
-		regular.addPost(book);
+		postClient.create(anime);
+		postClient.create(book);
 		
-		PostTypeClient.createPostType(important);
-		PostTypeClient.createPostType(regular);
-		PostTypeClient.getAllPostTypes();
-		PostTypeClient.getAllPosts();
+		postClient.getAll();
+		typeClient.getAll();
+		
 	}
 }
