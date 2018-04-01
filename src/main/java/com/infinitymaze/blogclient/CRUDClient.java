@@ -54,6 +54,7 @@ public class CRUDClient<T> {
 	}
 
 	public void get(long id) {
+		
 		ResponseEntity<T> response = restTemplate.getForEntity(restServiceUrl + id, typeParameterClass);
 		logger.info(typeParameterClass.getName() + " " + response.getBody());
 		logger.info(typeParameterClass.getName() + " " + response.getStatusCodeValue());
